@@ -1,0 +1,32 @@
+<html>
+
+<head>
+    <title>Login Page</title>
+    <style>
+        button > a {
+            text-decoration: none;
+         }
+    </style>
+</head>
+    
+    <body>
+        <form name='form1' action="loginvalidation.php" method="post">
+            <table width="500" cellpadding="3" style="border-collapse:collapse;">
+                <tr>
+                    <td>User id </td>
+                    <td><input type="text" name="userid" size="12" value="" /></td>
+                </tr>
+                <tr>
+                    <td>Password</td>
+                    <td><input type="password" name="passid" size="12" value="" /></td>
+                </tr>
+                <tr>
+                    <td><button type="submit" name="submit">Login</button></td>
+                    <td>
+                        <button type="submit"><a class="link" href="registration.html">registration</a></button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

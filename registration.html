@@ -1,0 +1,197 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>JavaScript sample registration form validation </title>
+    <script type='text/javascript'>
+        function formValidation() {
+            var uid = document.form1.userid;
+            var passid = document.form1.passid;
+            var uname = document.form1.username;
+            var uadd = document.form1.address;
+                    var ucountry = document.form1.country;
+                    var uzip = document.form1.zip;
+                    var uemail = document.form1.email;
+                    var umg = document.form1.mg;
+                    var ufg = document.form1.fg;
+                    if (userid_validation(uid, 5, 12)) {
+                        if (passid_validation(passid, 7, 12)) {
+                            if (allLetter(uname)) {
+                                if (alphanumeric(uadd)) {
+                                    if (countryselect(ucountry)) {
+                                        if (allnumeric(uzip)) {
+                                            if (ValidateEmail(uemail)) {
+                                                if (validgender(umg, ufg)) {
+                                                    return true;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    return false;
+                }
+                function userid_validation(uid, mx, my) {
+                        var uid_len = uid.value.length;
+                        if (uid_len == 0 || uid_len >= my || uid_len < mx) {
+                            alert("User Id should not be empty / length be between " + mx + " to " + my);
+                            uid.focus();
+                            return false;
+                        }
+                        return true;
+                    }
+                    function passid_validation(passid, mx, my) {
+                        var passid_len = passid.value.length;
+                        if (passid_len == 0 || passid_len >= my || passid_len < mx) {
+                            alert("Password should not be empty / length be between " + mx + " to " + my);
+                            passid.focus();
+                            return false;
+                        }
+                        return true;
+                    }
+                    function allLetter(uname) 
+                    {
+                        var letters = /^[A-Za-z]+$/;
+                        if (uname.value.match(letters)) {
+                            return true;
+                        }
+                        else {
+                            alert('Please input alphabet characters only');
+                            uname.focus();
+                            return false;
+                            }
+                                }
+                                function alphanumeric(uadd) {
+                                    var letters = /^[0-9a-zA-Z]+$/;
+                                    if (uadd.value.match(letters)) {
+                                        return true;
+                                    }
+                                    else {
+                                        alert('Please input alphanumeric characters only');
+                                        uadd.focus();
+                                        return false;
+                                    }
+                                }
+                                function allnumeric(uzip) {
+                                    var numbers = /^[0-9]+$/;
+                                    if (uzip.value.match(numbers)) {
+                                        return true;
+                                    }
+                                    else {
+                                        alert('Please input numeric characters only');
+                                        uzip.focus();
+                                        return false;
+                                    }
+                                }
+                                function ValidateEmail(uemail) {
+                                    var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+                                    if (uemail.value.match(mailformat)) {
+                                                return true;
+                                            }
+                                            else {
+                                                alert("You have entered an invalid email address!");
+                                                uemail.focus();
+                                                return false;
+                                            }
+                                        }
+                                        function countryselect(ucountry) {
+                                            if (ucountry.value == "Default") {
+                                                alert('Select your country from the list');
+                                                ucountry.focus();
+                                                return false;
+                                            }
+                                            else {
+                                                return true;
+                                            }
+                                        }
+                                        function validgender(umg, ufg) {
+                                            x = 0;
+                                            if (umg.checked) {
+                                                x++;
+                                            } if (ufg.checked) {
+                                                x++;
+                                            }
+                                                    if (x == 0) {
+                                                        alert('Select Male/Female');
+                                                        umg.focus();
+                                                        return false;
+                                                    }
+                                                    else {
+                                                        alert('Form Successfully Submitted');
+                                                        return true;
+                                                    }
+                                                }
+                                            </script>
+</head>
+
+<body bgcolor="green">
+    <center>
+        <h1>Registration Form</h1>
+    <form name='form1' action="connector.php" method='post' onsubmit='formValidation()'>
+        <table width="500" cellpadding="3" style="border-collapse:collapse;">
+            <tr>
+                <td>User id </td>
+                <td><input type="text" name="userid" id="userid" size="20" value="" /></td>
+            </tr>
+            <tr>
+                <td>Password</td>
+                <td><input type="password" name="passid" id="passid" size="20" value="" /></td>
+            </tr>
+            <tr>
+                <td>Name</td>
+                <td><input type="text" name="username" id="username" size="20" /></td>
+            </tr>
+            <tr>
+                <td>Address</td>
+                <td><input type="text" name="address" size="30" /></td>
+            </tr>
+            <tr>
+                <td>ZIP Code </td>
+                <td><input type="text" name="zip" /></td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td><input type="text" name="email" id="email" size="30" /></td>
+            </tr>
+            <tr>
+                <td>Select a Country</td>
+                <td><select name="country">
+                        <option selected="" value="Default">(Please select a country)</option>
+                        <option value="AF">Australia</option>
+                        <option value="AL">Canada</option>
+                        <option value="DZ">India</option>
+                        <option value="AS">Russia</option>
+                        <option value="AD">USA</option>
+                    </select></td>
+            </tr>
+            <tr>
+                <td>Gender:</td>
+                <td><input type="radio" name="mg" value="Male" />Male
+                    <input type="radio" name="fg" value="Female" />Female
+                </td>
+            </tr>
+            <tr>
+                <td>Language preference</td>
+                <td><input type="checkbox" name="en" value="en" checked />English
+                    <input type="checkbox" name="nonen" value="noen" />Non English
+                </td>
+            </tr>
+            <tr>
+                <td>Write about yourself<br>
+                (optional)</td>
+                <td>
+                    <textarea name="desc" rows="4" cols="30"></textarea></td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td><input type="submit" name="submit" value="Submit" /></td>
+                    <td>&nbsp;</td>
+                </tr>
+                </table>
+            </form>
+        </center>
+   </body>
+</html>
+
+            
